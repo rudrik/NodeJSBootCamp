@@ -77,5 +77,6 @@ exports.updateTour = (req, res) => {
     });
 };
 
+// We are calling the handler as controller.
 // Here we are exporting all the function so that it can be used by the importer of the tourController
 // 'module.exports' or just 'exports' is the way to export the function or variable.
