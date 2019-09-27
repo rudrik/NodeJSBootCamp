@@ -1,9 +1,12 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 
-//This is middle ware that will apply to each and every request.
+//1) Middle Ware.  This is middle ware that will apply to each and every request.
+app.use(morgan('dev'));
+
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -17,12 +20,12 @@ app.use((req, res, next) => {
 });
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
-
+//2) Route Handlers  
 const getAllTours = (req, res) => {
     console.log(req.requestTime);
     res.status(200).json({
         status: 'success',
-        requestedAt:req.requestTime,
+        requestedAt: req.requestTime,
         results: tours.length,
         data: {
             tours
@@ -97,6 +100,7 @@ const updateTour = (req, res) => {
 // app.patch('/api/v1/tours/:id', updateTour);
 // app.delete('/api/v1/tours/:id', deleteTour);
 
+//3) Routes
 app
     .route('/api/v1/tours')
     .get(getAllTours)
@@ -106,7 +110,7 @@ app
     .get(getTour)
     .patch(updateTour)
     .delete(deleteTour);
-
+//3) Server
 const port = 3000;
 app.listen(port, () => {
     console.log(`App running on ${port}...`);
