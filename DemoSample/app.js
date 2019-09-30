@@ -7,7 +7,10 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 //1) Middle Ware.  This is middle ware that will apply to each and every request.
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
+
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
