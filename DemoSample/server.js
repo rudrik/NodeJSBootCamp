@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 const dotenv = require('dotenv');
+const app = require('./app');
 
 dotenv.config({ path: './config.env' });
 
@@ -15,7 +17,6 @@ mongoose
     useFindAndModify: false
   })
   .then(() => console.log('DB Connection successfll'));
-const app = require('./app');
 
 // console.log(process.env);
 
