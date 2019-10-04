@@ -205,37 +205,5 @@
             "2022-01-16,10:00",
             "2022-12-12,10:00"
         ]
-    },
-    {
-        "id": 9,
-        "name": "Test Tour",
-        "duration": 12,
-        "difficylty": "easy"
-    },
-    {
-        "id": 10,
-        "name": "Test Tour 1",
-        "duration": 12,
-        "difficylty": "easy"
-    },
-    {
-        "id": 11,
-        "name": "Test Tour 1",
-        "duration": 12,
-        "difficylty": "easy"
-    },
-    {
-        "id": 12,
-        "name": "Rudrik",
-        "duration": 23,
-        "difficylty": "easy",
-        "price": 411
-    },
-    {
-        "id": 13,
-        "name": "Rudrik 1",
-        "duration": 23,
-        "difficylty": "easy",
-        "price": 411
     }
 ]
