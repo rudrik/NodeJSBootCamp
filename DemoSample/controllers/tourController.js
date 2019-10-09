@@ -60,6 +60,17 @@ exports.getAllTours = async (req, res) => {
 
     //EXECUTE QUERY
     const tours = await query;
+    // query.sort().select().skip().limit()
+
+    // const tours = await Tour.find()
+    //   .where('duration')
+    //   .equals(5)
+    //   .where('difficulty')
+    //   .equals('easy');
+    // const tours = await Tour.find({
+    //   duration: 5,
+    //   difficulty: 'easy'
+    // });
 
     // SEND RESPONSE
     res.status(200).json({
