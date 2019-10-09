@@ -13,20 +13,23 @@ const Tour = require('./../models/tourModel');
 
 exports.getAllTours = async (req, res) => {
   try {
+    console.log(req.query);
     //BUILDD QUERY
+    //1) Filtering
     // eslint-disable-next-line node/no-unsupported-features/es-syntax
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
-
     excludedFields.forEach(el => delete queryObj[el]);
 
-    console.log(req.query, queryObj);
+    //2) Advance Filtering
+    let queryString = JSON.stringify(queryObj);
+    queryString = queryString.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      match => `$${match}`
+    );
+    console.log(JSON.parse(queryString));
 
-    // const tours = await Tour.find({
-    //   duration: 5,
-    //   difficulty: 'easy'
-    // });
-    const query = Tour.find(queryObj);
+    const query = Tour.find(JSON.parse(queryString));
 
     //EXECUTE QUERY
     const tours = await query;
@@ -36,6 +39,10 @@ exports.getAllTours = async (req, res) => {
     //   .equals(5)
     //   .where('difficulty')
     //   .equals('easy');
+    // const tours = await Tour.find({
+    //   duration: 5,
+    //   difficulty: 'easy'
+    // });
 
     // SEND RESPONSE
     res.status(200).json({
