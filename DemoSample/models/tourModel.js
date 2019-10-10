@@ -93,13 +93,18 @@ tourSchema.pre(/^find/, function(next) {
 
 tourSchema.post(/^find/, function(docs, next) {
   console.log(`Query Took : ${Date.now() - this.start} milliseconds`);
-  console.log(docs);
-
   next();
 });
 
 tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
+});
+
+// AGGREGATION MIDDLEWARE
+tourSchema.pre('aggregate', function(next) {
+  this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
+  // console.log(this.pipeline());
+  next();
 });
 
 const Tour = mongoose.model('Tour', tourSchema);
