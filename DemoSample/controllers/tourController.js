@@ -13,19 +13,12 @@ const AppError = require('./../utils/appError');
 //   next();
 // };
 
-exports.aliasTopTours = async (req, res, next) => {
-  try {
-    req.query.limit = '5';
-    req.query.sort = '-ratingsAverage,price';
-    req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
-    next();
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err
-    });
-  }
-};
+exports.aliasTopTours = catchAsync(async (req, res, next) => {
+  req.query.limit = '5';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
+  next();
+});
 
 exports.getAllTours = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Tour.find(), req.query)
