@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-//3) ROUTER  By doung this we are  mounting the middleware for different route
+//3) ROUTER  By doing this we are  mounting the middleware for different route
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRoutes);
 
