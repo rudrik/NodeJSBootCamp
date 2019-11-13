@@ -27,7 +27,10 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
   const tours = await features.query;
-
+  // .populate({
+  //   path: 'guides',
+  //   select: '-__v -passwordChangedAt'
+  // });
   // SEND RESPONSE
   res.status(200).json({
     status: 'success',
@@ -52,6 +55,10 @@ exports.deleteTour = catchAsync(async (req, res, next) => {
 
 exports.getTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.id);
+  // .populate({
+  //   path: 'guides',
+  //   select: '-__v -passwordChangedAt'
+  // });
   // Tour.findOne({ _id: req.params.id})
 
   if (!tour) {
