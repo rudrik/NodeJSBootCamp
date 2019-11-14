@@ -8,6 +8,8 @@ const hpp = require('hpp');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRoutes = require('./routes/userRoutes');
+const reviewRouter = require('./routes/reviewRoutes');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -71,6 +73,7 @@ app.use((req, res, next) => {
 //3) ROUTER  By doing this we are  mounting the middleware for different route
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/reviews', reviewRouter);
 
 app.all('*', (req, res, next) => {
   // const err = new Error(`Can't find ${req.originalUrl} on this server`);
