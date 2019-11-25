@@ -124,6 +124,17 @@ tourSchema.pre('save', function(next) {
   next();
 });
 
+tourSchema.virtual('durationWeeks').get(function() {
+  return this.duration / 7;
+});
+
+//Virtual populate..  Current model ID is stored in which field of the referenced model. Review model have tour field with id parent referencing which is _id in this model
+tourSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'tour',
+  localField: '_id'
+});
+
 // tourSchema.pre('save', async function(next) {
 //   const guidesPromises = this.guides.map(async id => await User.findById(id));
 //   this.guides = await Promise.all(guidesPromises);
@@ -159,10 +170,6 @@ tourSchema.pre(/^find/, function(next) {
 tourSchema.post(/^find/, function(docs, next) {
   console.log(`Query Took : ${Date.now() - this.start} milliseconds`);
   next();
-});
-
-tourSchema.virtual('durationWeeks').get(function() {
-  return this.duration / 7;
 });
 
 // AGGREGATION MIDDLEWARE
