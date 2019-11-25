@@ -31,8 +31,6 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
-
-
 module.exports = router;
 
 // Here we are exporting the router so the the importer of the userRoute can use this route
