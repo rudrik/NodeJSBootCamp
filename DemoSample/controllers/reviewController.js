@@ -3,6 +3,7 @@ const Review = require('./../models/reviewModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerFactory');
 
 exports.createReview = catchAsync(async (req, res, next) => {
   // Allow nested Route
@@ -18,17 +19,19 @@ exports.createReview = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteReview = catchAsync(async (req, res, next) => {
-  const review = await Review.findByIdAndDelete(req.params.id);
+// exports.deleteReview = catchAsync(async (req, res, next) => {
+//   const review = await Review.findByIdAndDelete(req.params.id);
 
-  if (!review) {
-    return next(new AppError('No review found with that ID', 404));
-  }
-  res.status(204).json({
-    status: 'success',
-    data: null
-  });
-});
+//   if (!review) {
+//     return next(new AppError('No review found with that ID', 404));
+//   }
+//   res.status(204).json({
+//     status: 'success',
+//     data: null
+//   });
+// });
+
+exports.deleteReview = factory.deleteOne(Review);
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
   let filter = {};
