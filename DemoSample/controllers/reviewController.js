@@ -5,6 +5,10 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.createReview = catchAsync(async (req, res, next) => {
+  // Allow nested Route
+  if (!req.body.tour) req.body.tour = req.params.tourId;
+  if (!req.body.user) req.body.user = req.user.id; // We get req.user from protect middle ware
+
   const newReview = await Review.create(req.body);
   res.status(201).json({
     status: 'success',
