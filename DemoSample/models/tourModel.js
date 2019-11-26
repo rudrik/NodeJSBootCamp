@@ -118,6 +118,11 @@ const tourSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+// tourSchema.index({ price: 1 });
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 //DOCUMENT MIDDLEWARE: runs before the .save() and the .create()
 tourSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
